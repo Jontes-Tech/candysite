@@ -7,6 +7,7 @@ module.exports = {
 				background: "#26292d",
 				card: "#202429",
 				primary: "#9ecaff",
+				primaryMuted: "#6e9bcf",
 				modal: "#282f36"
 			},
 			fontFamily: {

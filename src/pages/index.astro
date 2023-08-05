@@ -28,7 +28,9 @@ const projects: ArtStationData[] = response.data;
   </head>
   <body class="bg-background">
     <section id="hero">
-      <h1 class="font-pixel text-[6vw] text-primary text-center font-black">CandyCane</h1>
+      <h1 class="font-pixel text-[6vw] text-primary text-center font-black">
+        CandyCane
+      </h1>
     </section>
     <section
       class="mx-auto max-w-4xl bg-card grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 rounded-2xl"
@@ -44,12 +46,26 @@ const projects: ArtStationData[] = response.data;
               fetchpriority={index > 5 ? "low" : "high"}
               onclick="
               document.getElementById('modal').showModal(); document.getElementById('modal').querySelector('h2').innerText = this.alt; document.getElementById('modal').querySelector('img').src = this.src;
-"
+              "
             />
           </div>
         ))
       }
     </section>
+    <div
+      id="acceptable-sponsored-content"
+      class="mx-auto max-w-4xl bg-primaryMuted my-8 p-2 rounded text-white"
+    >
+      <!-- Chip that says "ad" -->
+      <div
+        class="bg-primary text-xs font-bold rounded-full px-2 py-1 inline-block"
+      >
+        Ad
+      </div>
+      Acceptable ad spot available. Contact jonatan+candyads [at] jontes [dot] page
+      for more information.
+    </div>
+
     <footer class="text-center text-white text-sm my-4">
       <p>
         Made with{" "}
