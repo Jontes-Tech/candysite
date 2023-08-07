@@ -35,13 +35,8 @@ const projects = await Astro.glob("../../public/images/*.webp")
             <img
               class="object-cover galleryIMG bg-modal h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all"
               src={project.default.replace("/public/images/", "https://cdn.jsdelivr.net/gh/etherware-novice/jontes-site@master/public/images/")}
-              alt={project.default.replace("/public/images/", "").replace(".webp", "")}
-              title={project.default.replace("/public/images/", "").replace(".webp", "")}
               loading={index > 5 ? "lazy" : "eager"}
               fetchpriority={index > 5 ? "low" : "high"}
-              onclick="
-              document.getElementById('modal').showModal(); document.getElementById('modal').querySelector('h2').innerText = this.alt; document.getElementById('modal').querySelector('img').src = this.src;
-              "
             />
           </div>
         ))
@@ -79,9 +74,3 @@ const projects = await Astro.glob("../../public/images/*.webp")
     </footer>
   </body>
 </html>
-<script>
-  document.getElementById("close-modal")?.addEventListener("click", () => {
-    // @ts-expect-error
-    document.getElementById("modal")?.close();
-  });
-</script>
