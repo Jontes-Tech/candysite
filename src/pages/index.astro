@@ -1,12 +1,6 @@
 ---
-import type { ArtStationData } from "../types";
-
-// This is ran at build time on the server
-const response = await fetch(
-  "https://www.artstation.com/users/candycaneannihalator/projects.json"
-).then((res) => res.json());
-
-const projects: ArtStationData[] = response.data;
+// Glob all the PNGs in the projects folder using Astro
+const projects = await Astro.glob("../../public/images/*.webp")
 ---
 
 <html lang="en">
@@ -28,7 +22,7 @@ const projects: ArtStationData[] = response.data;
   </head>
   <body class="bg-background">
     <section id="hero">
-      <h1 class="font-pixel text-[6vw] text-primary text-center font-black">
+      <h1 class="font-pixel max-4xl mx-auto text-8xl text-primary text-center font-black">
         CandyCane
       </h1>
     </section>
@@ -36,13 +30,14 @@ const projects: ArtStationData[] = response.data;
       class="mx-auto max-w-4xl bg-card grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 rounded-2xl"
     >
       {
-        projects.map((project: ArtStationData, index: number) => (
+        projects.map((project:any, index: number) => (
           <div class="mx-auto">
             <img
-              class="object-cover galleryIMG bg-primary h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all"
-              src={project.cover.small_square_url}
-              alt={project.title}
-              title={"Click to view " + project.title}
+              class="object-cover galleryIMG bg-modal h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all"
+              src={project.default.replace("/public/images/", "https://cdn.jsdelivr.net/gh/etherware-novice/jontes-site@master/public/images/")}
+              alt={project.default.replace("/public/images/", "").replace(".webp", "")}
+              title={project.default.replace("/public/images/", "").replace(".webp", "")}
+              loading={index > 5 ? "lazy" : "eager"}
               fetchpriority={index > 5 ? "low" : "high"}
               onclick="
               document.getElementById('modal').showModal(); document.getElementById('modal').querySelector('h2').innerText = this.alt; document.getElementById('modal').querySelector('img').src = this.src;
@@ -82,29 +77,6 @@ const projects: ArtStationData[] = response.data;
         {" "} for CandyCane
       </p>
     </footer>
-    <dialog id="modal" class="bg-modal text-white shadow-md rounded-2xl p-4">
-      <button
-        id="close-modal"
-        class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-      <h2 class="text-lg font-medium mb-4"></h2>
-      <!-- This modal focuses on the image, make it glorious -->
-      <img class="mx-auto" src="" alt="" />
-    </dialog>
   </body>
 </html>
 <script>
