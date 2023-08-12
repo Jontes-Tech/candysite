@@ -1,11 +1,13 @@
 ---
 // Glob all the PNGs in the projects folder using Astro
-const projects = await Astro.glob("../../public/images/*.webp")
+const projects = await Astro.glob("../../public/images/*.webp");
+import Ad from "../Ad.astro";
 ---
 
 <html lang="en">
-  <head>
+  <>
     <meta charset="utf-8" />
+    <link rel="canonical" href="https://candy.nt3.me" />
     <link rel="icon" type="image/svg+xml" href="/me.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
@@ -16,25 +18,30 @@ const projects = await Astro.glob("../../public/images/*.webp")
       rel="stylesheet"
     />
     <meta name="description" content="CandyCane's Portfolio" />
-    <meta property="og:title" content="CandyCane" />
-    <meta property="og:description" content="CandyCane's Portfolio" />
-    <meta property="creator" content="Jonte from Jontes.Page" />
-  </head>
+    <meta property="og:title" content="CandyCanWaiting for first pageview
+    on candy.nt3.me.js"></script>
+  </>
   <body class="bg-background">
     <section id="hero">
-      <h1 class="font-pixel max-4xl mx-auto text-8xl text-primary text-center font-black">
+      <h1
+        class="font-pixel max-4xl mx-auto text-8xl text-primary text-center font-black"
+      >
         CandyCane
       </h1>
     </section>
+    <Ad />
     <section
       class="mx-auto max-w-4xl bg-card grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 rounded-2xl"
     >
       {
-        projects.reverse().map((project:any, index: number) => (
+        projects.reverse().map((project: any, index: number) => (
           <div class="mx-auto">
             <img
               class="object-cover galleryIMG bg-modal h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all"
-              src={project.default.replace("/public/images/", "https://cdn.jsdelivr.net/gh/Jontes-Tech/candysite@master/public/images/")}
+              src={project.default.replace(
+                "/public/images/",
+                "https://cdn.jsdelivr.net/gh/Jontes-Tech/candysite@master/public/images/"
+              )}
               loading={index > 5 ? "lazy" : "eager"}
               fetchpriority={index > 5 ? "low" : "high"}
             />
@@ -42,19 +49,7 @@ const projects = await Astro.glob("../../public/images/*.webp")
         ))
       }
     </section>
-    <div
-      id="acceptable-sponsored-content"
-      class="mx-auto max-w-4xl bg-primaryMuted my-8 p-2 rounded text-white"
-    >
-      <!-- Chip that says "ad" -->
-      <div
-        class="bg-primary text-xs font-bold rounded-full px-2 py-1 inline-block"
-      >
-        Ad
-      </div>
-      Acceptable ad spot available. Contact jonatan+candyads [at] jontes [dot] page
-      for more information.
-    </div>
+    <Ad />
 
     <footer class="text-center text-white text-sm my-4">
       <p>
