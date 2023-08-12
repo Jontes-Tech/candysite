@@ -30,7 +30,7 @@ const projects = await Astro.glob("../../public/images/*.webp")
       class="mx-auto max-w-4xl bg-card grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 rounded-2xl"
     >
       {
-        projects.map((project:any, index: number) => (
+        projects.reverse().map((project:any, index: number) => (
           <div class="mx-auto">
             <img
               class="object-cover galleryIMG bg-modal h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all"
