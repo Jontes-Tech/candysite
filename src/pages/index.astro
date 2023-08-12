@@ -34,7 +34,7 @@ const projects = await Astro.glob("../../public/images/*.webp")
           <div class="mx-auto">
             <img
               class="object-cover galleryIMG bg-modal h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all"
-              src={project.default.replace("/public/images/", "https://cdn.jsdelivr.net/gh/etherware-novice/jontes-site@master/public/images/")}
+              src={project.default.replace("/public/images/", "https://cdn.jsdelivr.net/gh/Jontes-Tech/candysite@master/public/images/")}
               loading={index > 5 ? "lazy" : "eager"}
               fetchpriority={index > 5 ? "low" : "high"}
             />
