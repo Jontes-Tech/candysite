@@ -1,12 +1,7 @@
 ---
-// Glob all the PNGs in the projects folder using Astro
-const glob = await Astro.glob("../../public/images/*.webp");
-
-// Advanced switcheroo to sort the projects by their number, not their name!
+const glob = await Astro.glob("../projects/*.md");
 const projects = glob.sort(
-  (a, b) =>
-    parseInt(a.default.split("/")[3].split("_")[0]) -
-    parseInt(b.default.split("/")[3].split("_")[0])
+  (a, b) => b.frontmatter.number - a.frontmatter.number
 );
 
 import Ad from "../Ad.astro";
@@ -47,14 +42,17 @@ import Ad from "../Ad.astro";
       class="mx-auto max-w-4xl bg-card grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 rounded-2xl"
     >
       {
-        projects.reverse().map((project: any, index: number) => (
+        projects.map((project: any, index: number) => (
           <div class="mx-auto">
             <img
               class="object-cover galleryIMG bg-modal h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all"
-              src={project.default.replace(
-                "/public/images/",
-                "https://cdn.jsdelivr.net/gh/Jontes-Tech/candysite@master/public/images/"
-              )}
+              src={
+                "https://cdn.jsdelivr.net/gh/Jontes-Tech/candysite@master/public/images/" +
+                project.frontmatter.number +
+                "_" +
+                project.frontmatter.title.toLowerCase() +
+                ".webp"
+              }
               loading={index > 5 ? "lazy" : "eager"}
               fetchpriority={index > 5 ? "low" : "high"}
             />
