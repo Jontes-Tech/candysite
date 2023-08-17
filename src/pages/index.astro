@@ -1,6 +1,14 @@
 ---
 // Glob all the PNGs in the projects folder using Astro
-const projects = await Astro.glob("../../public/images/*.webp");
+const glob = await Astro.glob("../../public/images/*.webp");
+
+// Advanced switcheroo to sort the projects by their number, not their name!
+const projects = glob.sort(
+  (a, b) =>
+    parseInt(a.default.split("/")[3].split("_")[0]) -
+    parseInt(b.default.split("/")[3].split("_")[0])
+);
+
 import Ad from "../Ad.astro";
 ---
 
@@ -23,10 +31,7 @@ import Ad from "../Ad.astro";
       src="https://stats.jontes.page/js/script.js"></script>
 
     <meta name="description" content="CandyCane's Portfolio" />
-    <meta
-      property="og:title"
-      content="CandyCane's Portfolio"
-    /></head
+    <meta property="og:title" content="CandyCane's Portfolio" /></head
   >
 
   <body class="bg-background">
