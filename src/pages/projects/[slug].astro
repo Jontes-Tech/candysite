@@ -1,0 +1,83 @@
+---
+// ../../projects/*.md
+
+import Ad from "../../Ad.astro";
+
+// getStaticPaths get frontmatter
+export async function getStaticPaths() {
+  const glob = await Astro.glob("../../projects/*.md");
+  // Astro expects an array of objects with `params` key
+  return glob.map((file) => ({ params: { slug: file.frontmatter.title } }));
+}
+
+const { slug } = Astro.params;
+const projects = await Astro.glob("../../projects/*.md");
+const project = projects.find((project) => project.frontmatter.title === slug);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="canonical" href="https://candy.nt3.me" />
+    <link rel="icon" type="image/svg+xml" href="/me.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>CandyCane</title>
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      href="https://fonts.bunny.net/css?family=vt323:400"
+      rel="stylesheet"
+    />
+    <script
+      defer
+      data-domain="candy.nt3.me"
+      src="https://stats.jontes.page/js/script.js"></script>
+
+    <meta name="description" content="CandyCane's Portfolio" />
+    <meta property="og:title" content="CandyCane's Portfolio" /></head
+  >
+
+  <body class="bg-background m-4">
+    <section class="text-center">
+      <h1 class="font-pixel max-4xl mx-auto text-8xl text-primary font-black">
+        {project?.frontmatter.title}
+      </h1>
+      <p class="text-neutral-200">By CandyCane</p>
+      <img
+        src={"https://cdn.jsdelivr.net/gh/Jontes-Tech/candysite@master/public/images/" +
+          project?.frontmatter.number +
+          "_" +
+          project?.frontmatter.title.toLowerCase() +
+          ".webp"}
+        style="image-rendering: pixelated;
+          image-rendering: crisp-edges;"
+        class="h-96 mx-auto place-self-center object-cover galleryIMG bg-modal shadow-sm rounded-3xl transition-all"
+      />
+    </section>
+
+    <Ad/>
+
+    <a
+      href="/"
+      class="absolute left-0 top-0 m-4 bg-neutral-200 hover:bg-neutral-300 p-2 rounded"
+      >&lt-- Back</a
+    >
+
+    <footer class="text-center text-white text-sm my-4">
+      <p>
+        Made with{" "}
+        <span role="img" aria-label="love"> ❤️</span>{" "}
+        by{" "}
+        <a
+          href="https://jontes.page?utm_source=candycane&utm_medium=footer&utm_campaign=portfolio"
+          rel="nofollow"
+          target="_blank"
+          class="underline"
+        >
+          Jonte
+        </a>
+        {" "} for CandyCane
+      </p>
+    </footer>
+  </body>
+</html>
