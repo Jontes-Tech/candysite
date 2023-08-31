@@ -2,14 +2,16 @@
 const glob = await Astro.glob("../projects/*.md");
 const projects = glob.sort(
   (a, b) => b.frontmatter.number - a.frontmatter.number
-);
+)
 
+import { ViewTransitions } from "astro:transitions";
 import Ad from "../Ad.astro";
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <ViewTransitions />
     <link rel="canonical" href="https://candy.nt3.me" />
     <link rel="icon" type="image/svg+xml" href="/me.png" />
     <meta name="viewport" content="width=device-width" />
@@ -44,10 +46,9 @@ import Ad from "../Ad.astro";
       {
         projects.map((project: any, index: number) => (
           <div class="mx-auto">
-            <a
-              href={"/projects/" + project.frontmatter.title}
-            >
+            <a href={"/projects/" + project.frontmatter.title}>
               <img
+                transition:name={project.frontmatter.title}
                 class="object-cover galleryIMG bg-modal h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all"
                 src={
                   "https://cdn.jsdelivr.net/gh/Jontes-Tech/candysite@master/public/images/" +
@@ -59,7 +60,7 @@ import Ad from "../Ad.astro";
                 loading={index > 5 ? "lazy" : "eager"}
                 fetchpriority={index > 5 ? "low" : "high"}
                 alt={project.frontmatter.title}
-                title={"Click to see "+project.frontmatter.title}
+                title={"Click to see " + project.frontmatter.number}
               />
             </a>
           </div>
