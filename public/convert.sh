@@ -1,4 +1,3 @@
-# Grab last from last.txt, and add 1
 last=$(cat last.txt)
 this=$(($last + 1))
 
@@ -8,6 +7,8 @@ slug=$(echo $filename | sed -e 's/\..*//g')
 
 echo $slug
 wget -O "images/$this"_"$filename" "$url" -q
+cwebp -q 80 "images/$this"_"$filename" -o "images/$this"_"$slug".webp
+rm "images/$this"_"$filename"
 
 echo "---" > "../src/projects/$slug.md"
 echo "title: $slug" >> "../src/projects/$slug.md"
@@ -16,3 +17,5 @@ echo "number: $this" >> "../src/projects/$slug.md"
 echo "---" >> "../src/projects/$slug.md"
 
 echo $this > last.txt
+
+echo "We got and saved it as $this"_"$slug.webp"
