@@ -2,7 +2,7 @@
 const glob = await Astro.glob("../projects/*.md");
 const projects = glob.sort(
   (a, b) => b.frontmatter.number - a.frontmatter.number
-)
+);
 
 import { ViewTransitions } from "astro:transitions";
 import Ad from "../Ad.astro";
@@ -49,13 +49,19 @@ import Ad from "../Ad.astro";
             <a href={"/projects/" + project.frontmatter.title}>
               <img
                 transition:name={project.frontmatter.title}
-                class="object-cover galleryIMG bg-modal h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all"
+                class="object-cover galleryIMG bg-modal h-[277.33333px] shadow-sm w-[277.33333px] rounded-3xl hover:rounded-lg transition-all text-white"
                 src={
-                  "https://cdn.jsdelivr.net/gh/Jontes-Tech/candysite@master/public/images/" +
-                  project.frontmatter.number +
-                  "_" +
-                  project.frontmatter.title.toLowerCase() +
-                  ".webp"
+                  process.env.NODE_ENV === "production"
+                    ? "https://cdn.jsdelivr.net/gh/Jontes-Tech/candysite@master/public/images/" +
+                      project.frontmatter.number +
+                      "_" +
+                      project.frontmatter.title.toLowerCase() +
+                      ".webp"
+                    : "/images/" +
+                      project.frontmatter.number +
+                      "_" +
+                      project.frontmatter.title.toLowerCase() +
+                      ".webp"
                 }
                 loading={index > 5 ? "lazy" : "eager"}
                 fetchpriority={index > 5 ? "low" : "high"}
@@ -73,7 +79,7 @@ import Ad from "../Ad.astro";
       <p>
         Made with{" "}
         <span role="img" aria-label="love"> ❤️</span>{" "}
-        by{" "}
+         by{" "}
         <a
           href="https://jontes.page?utm_source=candycane&utm_medium=footer&utm_campaign=portfolio"
           rel="nofollow"
@@ -85,5 +91,9 @@ import Ad from "../Ad.astro";
         {" "} for CandyCane
       </p>
     </footer>
-  </body>
+  </body><style>
+    .galleryIMG {
+      image-rendering: pixelated;
+    }
+  </style>
 </html>

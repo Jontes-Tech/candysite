@@ -1,3 +1,4 @@
+#!/bin/bash
 last=$(cat last.txt)
 this=$(($last + 1))
 
@@ -7,6 +8,8 @@ slug=$(echo $filename | sed -e 's/\..*//g')
 
 echo $slug
 wget -O "images/$this"_"$filename" "$url" -q
+#cp /tmp/candy/"$filename" "images/$this"_"$filename"
+echo "success"
 cwebp -q 80 "images/$this"_"$filename" -o "images/$this"_"$slug".webp
 rm "images/$this"_"$filename"
 
